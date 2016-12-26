@@ -1,0 +1,27 @@
+{
+    "name": "plinker/lxc",
+    "minimum-stability": "dev",
+    "description": "",
+    "license": "MIT",
+    "keywords": [],
+    "homepage": "https://bitbucket.org/plinker/example/",
+    "authors": [
+        {
+            "name": "Lawrence Cherone",
+            "email": "lawrence@cherone.co.uk",
+            "homepage": "http://cherone.co.uk/",
+            "role": "Owner"
+        }
+    ],
+    "support": {
+        "email": "plinker@icodes.it"
+    },
+    "require": {
+        "opis/closure": "^2.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plinker\\LXC\\": "src"
+        }
+    }
+}
