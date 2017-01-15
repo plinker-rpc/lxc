@@ -529,12 +529,12 @@ class Manager {
     public function ls()
     {
         //set task 
-        $this->model->findOrCreate([
+        $t = $this->model->findOrCreate([
             'tasks',
             'action' => 'update',
             'params' => json_encode([])
         ]);
-        
+
         //
         return $this->model->findAll('container');
     }
@@ -639,9 +639,9 @@ class Manager {
             //
             if (!empty($params[0])) {
                 $container = $this->model->findOne('container', 'id = ?', [$params[0]]);
-                $response['data'] = $this->model->find('log', 'container = ?', [$container->name]);
+                $response['data'] = \RedBeanPHP\R::exportAll($this->model->find('log', 'container = ?', [$container->name]));
             } else {
-                $response['data'] = \RedBeanPHP\R::exportAll($this->model->find('log'));
+                $response['data'] = \RedBeanPHP\R::exportAll($this->model->find('log'), true);
             }
         } catch (\Exception $e) {
             $response['error'] = true;
@@ -707,6 +707,84 @@ class Manager {
             } else {
                 $response['data'] = \RedBeanPHP\R::exportAll($this->model->find('tasks'));
             }
+        } catch (\Exception $e) {
+            $response['error'] = true;
+            $response['msg'] = $e->getMessage();
+        }
+
+        //
+        return $response;
+    }         
+    
+    /**
+     *
+     */
+    public function isCreatingOrDestroyingContainer($params = array())
+    {
+        //
+        $response = [
+            'error' => false,
+            'msg' => null,
+            'action' => 'isCreatingOrDestroyingContainer',
+            'token' => hash('sha256', 'isCreatingContainer'.@$params[0]),
+            'data' => []
+        ];
+
+        try {
+            //
+            $response['data'] = \RedBeanPHP\R::exportAll($this->model->find('tasks', '(action = "create" OR action = "destroy") AND completed = ""'));
+        } catch (\Exception $e) {
+            $response['error'] = true;
+            $response['msg'] = $e->getMessage();
+        }
+
+        //
+        return $response;
+    }    
+    
+    /**
+     *
+     */
+    public function isCreatingContainer($params = array())
+    {
+        //
+        $response = [
+            'error' => false,
+            'msg' => null,
+            'action' => 'isCreatingContainer',
+            'token' => hash('sha256', 'isCreatingContainer'.@$params[0]),
+            'data' => []
+        ];
+
+        try {
+            //
+            $response['data'] = \RedBeanPHP\R::exportAll($this->model->find('tasks', 'action = "create" AND completed = ""'));
+        } catch (\Exception $e) {
+            $response['error'] = true;
+            $response['msg'] = $e->getMessage();
+        }
+
+        //
+        return $response;
+    }     
+    
+    /**
+     *
+     */
+    public function isDestroyingContainer($params = array())
+    {
+        //
+        $response = [
+            'error' => false,
+            'msg' => null,
+            'action' => 'isDestroyingContainer',
+            'token' => hash('sha256', 'isDestroyingContainer'.@$params[0]),
+            'data' => []
+        ];
+
+        try {
+            //
+            $response['data'] = \RedBeanPHP\R::exportAll($this->model->find('tasks', 'action = "destroy" AND completed = ""'));
         } catch (\Exception $e) {
             $response['error'] = true;
             $response['msg'] = $e->getMessage();
