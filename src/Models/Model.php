@@ -5,7 +5,6 @@ use RedBeanPHP\R;
 
 class Model
 {
-
     public function __construct($config)
     {
         // hook in redbean
@@ -30,7 +29,7 @@ class Model
         $row->import($data);
 
         return $row;
-    }        
+    }
 
     /**
      * findOrCreate
@@ -67,7 +66,7 @@ class Model
         } else {
             return R::find($table);
         }
-    } 
+    }
 
     /**
      * Find One
@@ -92,7 +91,7 @@ class Model
             return R::findAll($table, $where, $params);
         } elseif ($where !== null && $params === null) {
             return R::findAll($table, $where);
-        }else{
+        } else {
             return R::findAll($table);
         }
     }
@@ -115,7 +114,7 @@ class Model
     {
         $row->import($data);
         return $row;
-    }        
+    }
 
     /**
      * Store
@@ -158,5 +157,4 @@ class Model
     {
         return R::nuke();
     }
-
 }

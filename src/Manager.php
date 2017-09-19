@@ -7,7 +7,8 @@ use Opis\Closure\SerializableClosure;
 /**
  *
  */
-class Manager {
+class Manager
+{
 
     /**
      *
@@ -50,7 +51,7 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' does not exist');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'stop',
@@ -66,7 +67,7 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Stop container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being stopped');
-            } 
+            }
             
             // task added to queue
             else {
@@ -83,7 +84,7 @@ class Manager {
         }
 
         //
-        return $response;   
+        return $response;
     }
     
     /**
@@ -116,7 +117,7 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' does not exist');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'start',
@@ -132,7 +133,7 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Start container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being started');
-            } 
+            }
             
             // task added to queue
             else {
@@ -149,7 +150,7 @@ class Manager {
         }
 
         //
-        return $response;   
+        return $response;
     }
     
     /**
@@ -182,7 +183,7 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' does not exist');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'destroy',
@@ -198,7 +199,7 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Destroy container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being destroyed');
-            } 
+            }
             
             // task added to queue
             else {
@@ -215,7 +216,7 @@ class Manager {
         }
 
         //
-        return $response;  
+        return $response;
     }
     
     /**
@@ -248,7 +249,7 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' does not exist');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'freeze',
@@ -264,7 +265,7 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Freeze container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being frozen');
-            } 
+            }
             
             // task added to queue
             else {
@@ -281,7 +282,7 @@ class Manager {
         }
 
         //
-        return $response;  
+        return $response;
     }
     
     /**
@@ -314,14 +315,14 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' does not exist');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'unfreeze',
                 'completed' => '',
                 'container' => $response['container']['name'],
                 'params' => json_encode([
-                    'token' => $response['token'], 
+                    'token' => $response['token'],
                     'name' => $response['container']['name']
                 ])
             ]);
@@ -330,7 +331,7 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Unfreeze container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being thawed');
-            } 
+            }
             
             // task added to queue
             else {
@@ -347,7 +348,7 @@ class Manager {
         }
 
         //
-        return $response;  
+        return $response;
     }
     
     /**
@@ -357,7 +358,7 @@ class Manager {
     {
         if (empty($params[0])) {
             throw new \Exception('Error: Container name parameter missing. $plink->stop(\'container_name\', \'new_name\');');
-        }        
+        }
         
         if (empty($params[1])) {
             throw new \Exception('Error: Containers new name parameter missing. $plink->stop(\'container_name\', \'new_name\');');
@@ -385,7 +386,7 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' does not exist');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'rename',
@@ -402,7 +403,7 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Rename container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being renamed');
-            } 
+            }
             
             // task added to queue
             else {
@@ -419,7 +420,7 @@ class Manager {
         }
 
         //
-        return $response;  
+        return $response;
     }
     
     /**
@@ -461,7 +462,7 @@ class Manager {
     {
         if (empty($params[0])) {
             throw new \Exception('Error: Container name parameter missing. $plink->autostart(\'container_name\');');
-        }        
+        }
         
         if (empty($params[1])) {
             throw new \Exception('Error: Missing value. $plink->autostart(\'container_name\');');
@@ -489,7 +490,7 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' does not exist');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'autostart',
@@ -506,7 +507,7 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Autostart container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being stopped');
-            } 
+            }
             
             // task added to queue
             else {
@@ -520,7 +521,7 @@ class Manager {
         }
 
         //
-        return $response;   
+        return $response;
     }
     
     /**
@@ -528,7 +529,7 @@ class Manager {
      */
     public function ls()
     {
-        //set task 
+        //set task
         $t = $this->model->findOrCreate([
             'tasks',
             'action' => 'update',
@@ -586,7 +587,7 @@ class Manager {
                 throw new \Exception('Container '.$response['container']['name'].' already exists');
             }
 
-            // set task 
+            // set task
             $response['task'] = $this->model->findOrCreate([
                 'tasks',
                 'action' => 'create',
@@ -602,15 +603,13 @@ class Manager {
             if (!empty($response['task']->token)) {
                 $response['msg'] = 'Create container task already in queue';
                 throw new \Exception('Container '.$response['container']['name'].' is being created');
-            } 
+            }
             
             // task added to queue
             else {
                 $response['task']->token = $response['token'];
                 $response['msg'] = 'Create container task added to queue';
                 $this->model->store($response['task']);
-                
-                
             }
         } catch (\Exception $e) {
             $response['error'] = true;
@@ -650,7 +649,7 @@ class Manager {
 
         //
         return $response;
-    }    
+    }
     
     /**
      *
@@ -714,7 +713,7 @@ class Manager {
 
         //
         return $response;
-    }         
+    }
     
     /**
      *
@@ -740,7 +739,7 @@ class Manager {
 
         //
         return $response;
-    }    
+    }
     
     /**
      *
@@ -766,7 +765,7 @@ class Manager {
 
         //
         return $response;
-    }     
+    }
     
     /**
      *
@@ -792,7 +791,7 @@ class Manager {
 
         //
         return $response;
-    }   
+    }
         
     /**
      *
@@ -834,5 +833,4 @@ class Manager {
 //
 //        return new SerializableClosure($test);
 //    }
-
 }
