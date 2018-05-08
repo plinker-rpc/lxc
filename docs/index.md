@@ -4,6 +4,8 @@ An older/deprecated component which controls LXC1.0 containers.
 
 !!! warning "Development halted"
     This component is no longer being actively developed, though bugs will be fixed if reported.
+    
+**This will be replaced by a LXD component which is coming soon!**
 
 
 ## Install
